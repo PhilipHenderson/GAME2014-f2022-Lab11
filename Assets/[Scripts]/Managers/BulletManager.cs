@@ -69,6 +69,8 @@ public class BulletManager
 
     public void ReturnBullet(GameObject bullet)
     {
+        var bulletController = bullet.GetComponent<Bullet>();
+        bulletController.ResetAllPhysics();
         bullet.SetActive(false);
         bulletPool.Enqueue(bullet);
     }
