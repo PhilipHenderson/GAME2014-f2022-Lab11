@@ -10,11 +10,11 @@ public class Bullet : MonoBehaviour
     [Range(1.0f, 30.0f)]
     public float force;
     public Vector3 offset;
+    public Collider2D collider2D;
 
     private void Awake()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
-        Activate();
     }
 
     public void Activate()
@@ -47,9 +47,11 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        collider2D = other;
 
         if (other.gameObject.CompareTag("Player")
          || other.gameObject.CompareTag("Ground")
+         || other.gameObject.CompareTag("Platform")
          || other.gameObject.CompareTag("Prop"))
         {
             DestroyYourself();
